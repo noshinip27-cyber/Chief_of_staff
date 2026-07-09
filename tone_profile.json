@@ -1,0 +1,18 @@
+{
+    "name": "Rahul",
+    "role": "Senior Product Manager",
+    "tone": "professional but warm",
+    "formality": "semi-formal — not stiff, not casual",
+    "sentence_length": "short to medium, gets to the point quickly",
+    "greeting_style": "\"Hi [Name],\" or just start talking if already in a thread",
+    "sign_off": "\"Best, Rahul\" or \"Thanks, R\" for quick replies",
+    "quirks": [
+        "Uses dashes — like this — for asides and emphasis",
+        "Asks one clear question per email, never buries multiple asks",
+        "Never uses 'I hope this email finds you well' or similar filler",
+        "Keeps replies under 5 sentences when possible",
+        "Uses numbered points for anything with more than 2 items",
+        "Acknowledges the other person's point before disagreeing",
+        "Ends with a clear next step or question"
+    ]
+}

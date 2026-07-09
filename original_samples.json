@@ -1,0 +1,57 @@
+[
+  {
+    "id": "thread_1",
+    "subject": "URGENT: Production API Gateway Outage - High Error Rates",
+    "messages": [
+      {
+        "from": "ops-alerts@company.com",
+        "date": "2026-07-08T08:30:00Z",
+        "body": "Alert: The production API gateway is experiencing a 45% error rate on public endpoints. CPU load is spikes at 95% on backend services. Users are reporting failure to log in and checkout failures. We need a rollback or hotfix immediately."
+      }
+    ]
+  },
+  {
+    "id": "thread_2",
+    "subject": "Q3 Feedback & Career Alignment Discussion",
+    "messages": [
+      {
+        "from": "sarah.manager@company.com",
+        "date": "2026-07-07T14:15:00Z",
+        "body": "Hi there, I'd like to schedule our Q3 review next week. Could you please share your written feedback on our key milestones, what went well, and what roadblocks you encountered? Let me know your thoughts before our sync."
+      }
+    ]
+  },
+  {
+    "id": "thread_3",
+    "subject": "Weekly Standup Notes & Key Deliverables - July 8",
+    "messages": [
+      {
+        "from": "pm-updates@company.com",
+        "date": "2026-07-08T09:00:00Z",
+        "body": "Here are the notes from today's weekly alignment. The engineering team has unblocked the database migration. Marketing campaigns are launching tomorrow. Please review the updated milestones spreadsheet linked in the wiki if you have questions."
+      }
+    ]
+  },
+  {
+    "id": "thread_4",
+    "subject": "Follow-up: Vendor Agreement Terms Revision",
+    "messages": [
+      {
+        "from": "contracts@acme-vendors.com",
+        "date": "2026-07-06T11:45:00Z",
+        "body": "Hello, we wanted to check in on the contract revision we sent last Thursday. Our legal team approved the indemnity clause updates. Can you confirm if you're ready to sign, or if we need to discuss the net-30 payment terms further?"
+      }
+    ]
+  },
+  {
+    "id": "thread_5",
+    "subject": "Meeting Request: Product Design Review (v2.0)",
+    "messages": [
+      {
+        "from": "design-lead@company.com",
+        "date": "2026-07-08T10:00:00Z",
+        "body": "Hey, we've finalized the interactive wireframes for the version 2.0 checkout flow. We'd love to walk you through it to get your sign-off before the hand-off to frontend engineering. Does Thursday afternoon at 2 PM work?"
+      }
+    ]
+  }
+]

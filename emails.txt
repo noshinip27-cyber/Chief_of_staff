@@ -1,0 +1,5 @@
+From: boss@company.com - Subject: "URGENT: Client escalation needs response today"
+Thread 2 - From: newsletter@medium.com - Subject: "10 articles you might like this week"
+Thread 3 - From: teammate@company.com - Subject: "Quick question about the Q3 deck"
+Thread 4 - From: billing@software.com - Subject: "Your invoice is ready"
+Thread 5 - From: recruiter@linkedin.com - Subject: "Exciting opportunity at a fast-growing startup"

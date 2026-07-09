@@ -1,0 +1,17 @@
+[
+    {
+        "subject": "Re: Design review feedback",
+        "to": "priya@company.com",
+        "body": "Hi Priya,\n\nReviewed the mockups — love the direction on the onboarding flow. Two things:\n\n1. The CTA on screen 3 feels buried. Can we make it more prominent?\n2. Font size on mobile looks tight. Worth testing on a real device.\n\nOtherwise good to go. Ship it.\n\nBest, Rahul"
+    },
+    {
+        "subject": "Re: Q3 planning timeline",
+        "to": "amit@company.com",
+        "body": "Amit,\n\nTimeline works for me. One ask — can we push the stakeholder review from Thursday to Friday? I've got a conflict that afternoon and don't want to send a delegate for this one.\n\nEverything else looks solid. Let's lock it in.\n\nThanks, R"
+    },
+    {
+        "subject": "Re: Vendor proposal - DataSync",
+        "to": "finance-team@company.com",
+        "body": "Hi team,\n\nLooked at the DataSync proposal. My take:\n\n1. Pricing is fair for what we get — comparable to what we paid for ToolX last year\n2. Integration timeline (3 weeks) is aggressive but doable if we start before July\n3. One concern — their SLA doesn't cover weekend incidents. Worth pushing on that.\n\nRecommendation: proceed, but negotiate the SLA clause before signing.\n\nBest, Rahul"
+    }
+]

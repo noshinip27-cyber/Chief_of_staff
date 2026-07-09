@@ -1,0 +1,44 @@
+[
+  {
+    "timestamp": "2026-07-09T13:30:16.693708+00:00",
+    "action_type": "booked",
+    "thread_subject": "Important meeting",
+    "detail": "Important meeting",
+    "id": "af2h0m2a44a1daln7i9lg7f54o"
+  },
+  {
+    "timestamp": "2026-07-09T13:54:51.983840+00:00",
+    "action_type": "sent",
+    "thread_subject": "Important discussion",
+    "detail": "sturniolo1nmc@gmail.com",
+    "id": "19f4728ec7f9f0a4"
+  },
+  {
+    "timestamp": "2026-07-09T13:54:56.642373+00:00",
+    "action_type": "sent",
+    "thread_subject": "Request for review",
+    "detail": "ghema2419@gmail.com",
+    "id": "19f4728ff40ee883"
+  },
+  {
+    "timestamp": "2026-07-09T14:35:48.054549+00:00",
+    "action_type": "booked",
+    "thread_subject": "Important discussion",
+    "detail": "Important project discussion",
+    "id": "gshtb0bldqalfq9he5m1tb3sbs"
+  },
+  {
+    "timestamp": "2026-07-09T15:45:13.480065+00:00",
+    "action_type": "booked",
+    "thread_subject": "Meeting",
+    "detail": "Important project",
+    "id": "i5dhe5k2qoncouuj0q7jcvdnlc"
+  },
+  {
+    "timestamp": "2026-07-09T15:45:32.833927+00:00",
+    "action_type": "sent",
+    "thread_subject": "Meeting",
+    "detail": "nk1234612@gmail.com",
+    "id": "19f478e414a604c0"
+  }
+]
