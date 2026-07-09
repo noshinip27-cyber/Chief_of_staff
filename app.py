@@ -587,10 +587,27 @@ def render_sidebar() -> None:
         st.caption("Fetches, triages, and drafts — stops at Approval Gate.")
 
         st.divider()
+
+        # Detect whether Gmail credentials are available on this machine.
+        # On public deployments credentials.json / token.json won't exist,
+        # so we only show the Gmail option when they are present locally.
+        import os as _os
+        _here = _os.path.dirname(_os.path.abspath(__file__))
+        _gmail_available = (
+            _os.path.exists(_os.path.join(_here, "credentials.json"))
+            or _os.path.exists(_os.path.join(_here, "token.json"))
+        )
+
+        _source_options = (
+            ["Sample threads", "Gmail via engine.py"]
+            if _gmail_available
+            else ["Sample threads"]
+        )
+
         new_source = st.radio(
             "Where do threads come from?",
-            options=["Sample threads", "Gmail via engine.py"],
-            index=0 if st.session_state.source == "Sample threads" else 1,
+            options=_source_options,
+            index=0 if st.session_state.source not in _source_options else _source_options.index(st.session_state.source),
             label_visibility="collapsed",
             key="source_radio",
         )
@@ -1739,7 +1756,7 @@ def render_export_phase() -> None:
 
     st.divider()
     st.info(
-        "Share with **#MyAIChiefOfStaff** to earn your **Ghostwriter** badge! 🏅"
+        "Checking Gmails everyday are now easy!"
     )
 
 
