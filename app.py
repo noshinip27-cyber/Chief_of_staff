@@ -146,7 +146,7 @@ def fetch_threads_via_engine() -> list[dict[str, Any]]:
     (because creds aren't configured), raise RuntimeError with a friendly
     message so the caller can surface it.
     """
-    fetch_threads = _get_fetch_threads()
+    from engine import fetch_threads  # type: ignore  # always fresh import
     result = fetch_threads(max_results=5)
 
     if not isinstance(result, list):
@@ -411,10 +411,12 @@ def _render_pipeline_execution() -> None:
             log.append(f"[OK] {entry}")
 
         except Exception as exc:  # noqa: BLE001
+            import traceback
             msg = f"Failed to fetch threads from '{source}': {exc}"
             st.write(f"❌ Fetch: {msg}")
+            st.code(traceback.format_exc(), language="text")
             log.append(f"[ERROR] {msg}")
-            status.update(label="Pipeline failed — could not fetch threads.", state="error")
+            status.update(label=f"Pipeline failed — {exc}", state="error")
             st.session_state.pipeline_log = log
             st.session_state.pipeline_running = False
             return
