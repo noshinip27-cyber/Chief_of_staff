@@ -147,7 +147,7 @@ def fetch_threads_via_engine() -> list[dict[str, Any]]:
     message so the caller can surface it.
     """
     fetch_threads = _get_fetch_threads()
-    result = fetch_threads(max_results=1)
+    result = fetch_threads(max_results=5)
 
     if not isinstance(result, list):
         # engine.py returned an MCP plan — we can't run that from Streamlit.

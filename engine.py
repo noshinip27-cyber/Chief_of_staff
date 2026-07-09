@@ -60,7 +60,7 @@ from triage import triage_inbox, format_digest
 # Config
 # ---------------------------------------------------------------------------
 
-DEFAULT_MAX_RESULTS = 1
+DEFAULT_MAX_RESULTS = 5
 GMAIL_USER_ID = "me"  # special "me" identifier for the authenticated user
 
 
