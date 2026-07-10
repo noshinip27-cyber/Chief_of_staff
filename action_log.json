@@ -40,5 +40,33 @@
     "thread_subject": "Meeting",
     "detail": "nk1234612@gmail.com",
     "id": "19f478e414a604c0"
+  },
+  {
+    "timestamp": "2026-07-10T15:05:54.811291+00:00",
+    "action_type": "booked",
+    "thread_subject": "Q3 Review",
+    "detail": "Q3 Review",
+    "id": "e8q2l9qid68tmfsauut1u3138g"
+  },
+  {
+    "timestamp": "2026-07-10T15:19:00.821086+00:00",
+    "action_type": "sent",
+    "thread_subject": "URGENT: Production API Gateway Outage - High Error Rates",
+    "detail": "ops-alerts@company.com",
+    "id": "fake_sample_thread_sent_id"
+  },
+  {
+    "timestamp": "2026-07-10T15:19:06.720047+00:00",
+    "action_type": "sent",
+    "thread_subject": "Q3 Review",
+    "detail": "sarah.manager@company.com",
+    "id": "fake_sample_thread_sent_id"
+  },
+  {
+    "timestamp": "2026-07-10T15:34:09.786832+00:00",
+    "action_type": "booked",
+    "thread_subject": "Q3 Review",
+    "detail": "Q3 Review",
+    "id": "mock_event_id"
   }
 ]

@@ -17,7 +17,7 @@
       {
         "from": "sarah.manager@company.com",
         "date": "2026-07-07T14:15:00Z",
-        "body": "Hi there, I'd like to schedule our Q3 review next week."
+        "body": "Hi there, I'd like to schedule our Q3 review next week. [BOOKED]"
       }
     ]
   } 

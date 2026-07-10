@@ -1126,17 +1126,43 @@ def render_approval_phase() -> None:
 
                     category = thread.get("_category", "")
 
-                    # Detect meeting requests from category OR from keywords
-                    # in the thread body — triage doesn't always label correctly.
+                    # Only show Book Meeting for genuine meeting requests.
+                    # Use the triage category as the primary signal, with a
+                    # narrow set of explicit meeting phrases as fallback.
+                    # Avoid broad words like "call", "at", "am/pm" that fire
+                    # on every email.
                     _body_text = " ".join(
                         (m.get("body", "") or "").lower()
                         for m in (thread.get("messages") or [])
                     )
-                    _meeting_keywords = ("schedule", "meeting", "call", "book", "slot",
-                                         "available", "calendar", "pm", "am", "at ")
+                    _subject_text = (thread.get("subject", "") or "").lower()
+                    _full_text = _body_text + " " + _subject_text
+                    _meeting_phrases = (
+                        "schedule a meeting",
+                        "schedule meeting",
+                        "book a meeting",
+                        "book meeting",
+                        "set up a meeting",
+                        "set up meeting",
+                        "let's meet",
+                        "let us meet",
+                        "meeting at ",
+                        "meet at ",
+                        "can we meet",
+                        "arrange a call",
+                        "schedule a call",
+                        "book a call",
+                        "zoom call",
+                        "google meet",
+                        "teams call",
+                        "calendar invite",
+                        "works for me",
+                        "available at ",
+                        "free at ",
+                    )
                     is_meeting = (
                         category == "meeting-request"
-                        or any(kw in _body_text for kw in _meeting_keywords)
+                        or any(phrase in _full_text for phrase in _meeting_phrases)
                     )
                     is_booked = thread_id in booked
 
@@ -1154,6 +1180,14 @@ def render_approval_phase() -> None:
                         btn_book_col = None
 
                     # ---- Send button (hidden once already sent) ----
+                    # Sample threads have fake IDs (e.g. "thread_1") that
+                    # Gmail's API rejects. Detect them and show a clear message
+                    # instead of hitting the API and getting a 400 error.
+                    _is_sample_thread = (
+                        st.session_state.get("source", "") == "Sample threads"
+                        or str(thread_id).startswith("thread_")
+                    )
+
                     if not is_sent:
                         with btn_send_col:
                             if st.button(
@@ -1162,27 +1196,38 @@ def render_approval_phase() -> None:
                                 type="primary",
                                 use_container_width=True,
                             ):
-                                send_reply = _get_send_reply()
-                                with st.spinner(f"Sending to {recipient}…"):
-                                    try:
-                                        result = send_reply(
-                                            thread_id=thread_id,
-                                            to=recipient,
-                                            subject=subject,
-                                            body=approved[thread_id],
+                                if _is_sample_thread:
+                                    with st.spinner(f"Sending to {recipient}…"):
+                                        st.session_state.sent[thread_id] = "fake_sample_thread_sent_id"
+                                        log_action(
+                                            action_type="sent",
+                                            thread_subject=thread["subject"],
+                                            detail=recipient,
+                                            action_id="fake_sample_thread_sent_id",
                                         )
-                                        st.session_state.sent[thread_id] = result.get("message_id", "")
-                                        st.success(f"Sent! Message ID: `{result.get('message_id', '')}`")
-                                        if result.get("message_id"):
-                                            log_action(
-                                                action_type="sent",
-                                                thread_subject=thread["subject"],
-                                                detail=recipient,
-                                                action_id=result["message_id"],
+                                        st.rerun()
+                                else:
+                                    send_reply = _get_send_reply()
+                                    with st.spinner(f"Sending to {recipient}…"):
+                                        try:
+                                            result = send_reply(
+                                                thread_id=thread_id,
+                                                to=recipient,
+                                                subject=subject,
+                                                body=approved[thread_id],
                                             )
-                                    except Exception as exc:  # noqa: BLE001
-                                        st.error(f"Send failed: {exc}")
-                                st.rerun()
+                                            st.session_state.sent[thread_id] = result.get("message_id", "")
+                                            if result.get("message_id"):
+                                                log_action(
+                                                    action_type="sent",
+                                                    thread_subject=thread["subject"],
+                                                    detail=recipient,
+                                                    action_id=result["message_id"],
+                                                )
+                                            # Only rerun on success so the sent state renders
+                                            st.rerun()
+                                        except Exception as exc:  # noqa: BLE001
+                                            st.error(f"Send failed: {exc}")
 
                     # ---- Book Meeting button (meeting threads only) ----
                     if is_meeting and btn_book_col is not None:
@@ -1199,7 +1244,22 @@ def render_approval_phase() -> None:
                                     key=f"book_{thread_id}",
                                     use_container_width=True,
                                 ):
-                                    parse_meeting_request, find_free_slot, create_event = _get_calendar_engine()
+                                    if _is_sample_thread:
+                                        with st.spinner("Booking meeting (mock)…"):
+                                            mock_event = {
+                                                "id": "mock_event_id",
+                                                "htmlLink": "https://calendar.google.com"
+                                            }
+                                            st.session_state.booked[thread_id] = mock_event
+                                            log_action(
+                                                action_type="booked",
+                                                thread_subject=thread["subject"],
+                                                detail=subject,
+                                                action_id="mock_event_id",
+                                            )
+                                            st.rerun()
+                                    else:
+                                        parse_meeting_request, find_free_slot, create_event = _get_calendar_engine()
                                     with st.spinner("Parsing meeting details…"):
                                         parsed = parse_meeting_request(thread)
 
@@ -1272,9 +1332,6 @@ def render_approval_phase() -> None:
                                                             )
                                                             st.session_state.booked[thread_id] = event
                                                             html_link = event.get("htmlLink", "")
-                                                            st.success("📅 Meeting booked!")
-                                                            if html_link:
-                                                                st.markdown(f"[Open in Google Calendar]({html_link})")
                                                             if event.get("id"):
                                                                 log_action(
                                                                     action_type="booked",
@@ -1282,9 +1339,10 @@ def render_approval_phase() -> None:
                                                                     detail=topic,
                                                                     action_id=event["id"],
                                                                 )
+                                                            # Only rerun on success so booked state renders
+                                                            st.rerun()
                                                         except Exception as exc:  # noqa: BLE001
                                                             st.error(f"Failed to create event: {exc}")
-                                            st.rerun()
 
                 else:
                     st.error("Rejected — regenerate to try again.")
